@@ -1,33 +1,81 @@
 var ContactList = ContactList || { Models: {}, Collections: {}, Views: {} };
 
-// On load, what needs to happen?
-// need to get all contact collections from the database
+var aliveContacts = new ContactList.Collections.ContactCollection();
 
-var collection = new ContactList.Collections.Category();
+var deadContacts = new ContactList.Collections.ContactCollection();
+
+var undeadContacts = new ContactList.Collections.ContactCollection();
+
+var aliveContactListView = new ContactList.Views.ContactListView({
+		collection: aliveContacts,
+		el: $('.alive')
+	});
+
+var deadContactListView = new ContactList.Views.ContactListView({
+		collection: deadContacts,
+		el: $('.dead')
+	})
+
+var undeadContactListView = new ContactList.Views.ContactListView({
+		collection: undeadContacts,
+		el: $('.undead')
+	})
+
+// function to sort into new collections by category id
+
+function sort(data){
+	for (var i = 0; i < data.length; i++){
+		if (data[i].category_id == 3){
+			aliveContacts.create(data[i]);
+		} else if (data[i].category_id == 4){
+			deadContacts.create(data[i]);
+		} else {
+			undeadContacts.create(data[i]);
+		}
+	}
+}
 
 ContactList.initialize = function(){
-	// create new category collection
-	// collection = new ContactList.Collections.Category();
 
-	// fetch all categories
-	collection.fetch();
+	$.ajax({
+		url: '/contacts',
+		type: 'GET',
+		dataType: 'json'
+	}).done(function(data){
+		sort(data);
+	})
 
-	// var alive = new ContactList.Models.Category({name: "alive"});
-
-	// var dead = new ContactList.Models.Category({name: "dead"});
-
-	// var undead = new ContactList.Models.Category({name: "undead"});
-
-	// var aliveView = new ContactList.Views.Category({model: alive, el: $('#alive')});
-
-	// var deadView = new ContactList.Views.Category({model: dead, el: $('#dead')});
-
-	// var undeadView = new ContactList.Views.Category({model: undead, el: $('#undead')}); 
-
+	$('#newContact').on('submit', function(event){
+		event.preventDefault();
+		var name = $('input[name="name"]').val();
+		var age = $('input[name="age"]').val();
+		var address = $('input[name="address"]').val();
+		var phoneNumber = $('input[name="phoneNumber"]').val();
+		var category = $('select').val();
+		$.ajax({
+			url: 'http://api.randomuser.me/',
+			type: 'GET',
+  		dataType: 'json'
+		}).done(function(data){
+			var picture = data.results[0].user.picture.medium
+			if (category === "Alive"){
+				var categoryId = 3
+				aliveContacts.create({name: name, age: age, address: address, phone_number: phoneNumber, category_id: categoryId, picture: picture})
+			} else if (category === "Dead"){
+				var categoryId = 4
+				deadContacts.create({name: name, age: age, address: address, phone_number: phoneNumber, category_id: categoryId, picture: picture})
+			} else {
+				var categoryId = 5
+				undeadContacts.create({name: name, age: age, address: address, phone_number: phoneNumber, category_id: categoryId, picture: picture})
+			};
+		})
+	})
 };
 
-// $(function(){
+$(function(){
 
-// 	ContactList.initialize();
+	ContactList.initialize();
 
-// });
+})
+
+

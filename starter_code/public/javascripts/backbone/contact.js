@@ -1,22 +1,30 @@
 var ContactList = ContactList || { Models: {}, Collections: {}, Views: {} };
 
-// Contact Model
+// *****Contact Model*****
 ContactList.Models.Contact = Backbone.Model.extend({
 	initialize: function(){
 		console.log("A new contact has been added!")
+	},
+
+	defaults: {
+		name: "Joe",
+		age: 35,
+		address: "152 Miranda Way",
+		phone_number: "203-215-3423",
+		picture: "http://www.washingtonindependentreviewofbooks.com/images/made/aadc04afc622ccbb/gollum_395_394.jpg",
+		category_id: 5,
 	}
 });
 
-// Contact Collection
-
-ContactList.Collections.Contact = Backbone.Collection.extend({
+// *****Contact Collection*****
+ContactList.Collections.ContactCollection = Backbone.Collection.extend({
 	model: ContactList.Models.Contact,
-	urlRoot: "/contacts"
+	url: "/contacts",
 });
 
-// Contact View
+// *****Contact View*****
 // If the contact this view is listening to changes or is destroyed, it will render or remove itself accordingly.
-ContactList.Views.Contact = Backbone.View.extend({
+ContactList.Views.ContactView = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.model, "change", this.render)
 		this.listenTo(this.model, "destroy", this.remove)
@@ -44,7 +52,9 @@ ContactList.Views.Contact = Backbone.View.extend({
 	renderEditForm: function(){
 		var self = this;
 		this.$el.html(this.editTemplate(this.model.attributes));
-		this.$el.find('form').on('submit', function(event){
+		var button = this.$el.find('#submit')
+		button.on('click', function(event){
+			console.log('changes submitted');
 			event.preventDefault();
 			var name = self.$el.find('input[name="name"]').val();
 			var picture = self.$el.find('input[name="picture"]').val();
@@ -59,17 +69,28 @@ ContactList.Views.Contact = Backbone.View.extend({
 			} else {
 				var categoryId = 5
 			};
-			self.model.set('name', name);
-			self.model.set('picture', picture);
-			self.model.set('age', age);
-			self.model.set('address', address);
-			self.model.set('phone_number', phoneNumber);
-			self.model.set('category_id', categoryId);
-			self.model.save();
-		})
-
+			// update function depending on collection; will move to another category if categoryId is changed
+			if (categoryId === self.model.attributes.category_id){
+				self.model.set('name', name);
+				self.model.set('picture', picture);
+				self.model.set('age', age);
+				self.model.set('address', address);
+				self.model.set('phone_number', phoneNumber);
+				self.model.set('category_id', categoryId);
+				self.model.save();
+			} else if (categoryId === 3){
+				aliveContacts.create({name: name, age: age, address: address, phone_number: phoneNumber, category_id: categoryId, picture: picture});
+				self.model.destroy();
+			} else if (categoryId === 4){
+				deadContacts.create({name: name, age: age, address: address, phone_number: phoneNumber, category_id: categoryId, picture: picture});
+				self.model.destroy();
+			} else {
+				undeadContacts.create({name: name, age: age, address: address, phone_number: phoneNumber, category_id: categoryId, picture: picture});
+				self.model.destroy();
+			};
+		});
 		// on cancel button, will re-render itself without changing information
-		this.$el.find('button').on('click', function(event){
+		this.$el.find('#cancel').on('click', function(event){
 			event.preventDefault();
 			self.render();
 		})
@@ -83,7 +104,7 @@ ContactList.Views.Contact = Backbone.View.extend({
 
 // Contact List View
 
-ContactList.Views.ContactList = Backbone.View.extend({
+ContactList.Views.ContactListView = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.collection, 'add', this.render);
 	},

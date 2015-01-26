@@ -11,7 +11,7 @@
 	<h1>Zombie Apocalypse Now</h1>
 	<p>Who is still alive to take your call?</p>
 
-	<form>New Contact
+	<form id="newContact">New Contact
 		<label>Name:
 			<input type="text" name="name">
 		</label>
@@ -35,6 +35,7 @@
 				<option>Undead</option>
 			</select>
 		</label>
+		<button>Add Contact</button>
 	</form>
 
 	<ul class="container">
@@ -80,23 +81,23 @@
   <script type="text/template" id="contact-edit-template">
   	<form>
   		<label>Name:
-				<input type="text" name="name" placeholder= <%= name %>>
+				<input type="text" name="name" value= <%= name %>>
 			</label>
 
 			<label>Picture:
-				<input type="text" name="picture" placeholder="enter url">
+				<input type="text" name="picture" value=<%= picture %>>
 			</label>
 
 			<label>Age:
-				<input type="text" name="age" placeholder= <%= age %>
+				<input type="text" name="age" value= <%= age %>
 			</label>
 			
 			<label>Address:
-				<input type="text" name="address" placeholder= <%= address %>
+				<input type="text" name="address" value= <%= address %>
 			</label>
 		
 			<label>Phone Number:
-				<input type="text" name="phoneNumber" placeholder= <%= phone_number %> 
+				<input type="text" name="phoneNumber" value= <%= phone_number %> 
 			</label>
 
 			<label>Category:
@@ -107,12 +108,15 @@
 				</select>
 			</label>
   	</form>
-  	<button data-action="cancel">cancel</button>
+  	<button id="submit">submit changes</button>
+  	<button id="cancel">cancel</button>
   </script>
 
   <!--- Backbone App -->
   <script type="text/javascript" src="/javascripts/backbone/contact.js"></script>
-  <script type="text/javascript" src="/javascripts/backbone/category.js"></script>
+
+  <!--- <script type="text/javascript" src="/javascripts/backbone/category.js"></script> -->
+
   <script type="text/javascript" src="/javascripts/scripts.js"></script>
  
 </body>
