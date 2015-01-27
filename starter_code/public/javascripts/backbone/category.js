@@ -67,9 +67,3 @@ ContactList.Views.Category = Backbone.View.extend({
 
 }); 
 
-
-
-
-
-
-

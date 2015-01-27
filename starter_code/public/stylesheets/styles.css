@@ -1,20 +1,46 @@
+header {
+	text-align: center;
+}
+
+button {
+	border-radius: 5px;
+}
+
+button:hover {
+	background-color: red;
+	border: 3px solid black;
+}
+
 h1 {
 	color: red;
+}
+
+hr {
+	color: black;
+	height: 3px;
+}
+
+ul {
+	list-style: none;
 }
 
 article {
 	border: 3px solid black;
 	text-align: center;
+	padding: 10px;
 }
 
-.alive {
+.Alive {
 	background-color: green;
+	text-align: center;
 }
 
-.dead {
+.Dead {
 	background-color: red;
+	text-align: center;
 }
 
-.undead {
+.Undead {
 	background-color: yellow;
+	text-align: center;
 }

@@ -8,49 +8,59 @@
 </head>
 
 <body>
-	<h1>Zombie Apocalypse Now</h1>
-	<p>Who is still alive to take your call?</p>
+	<header>	
+		<h1>Zombie Apocalypse Now</h1>
+		<h3>Who is still alive to take your call?</h3>
+		<form>
+			<input type="search" name="contactSearch" placeholder="Search Contacts">
+			<button type="submit" id="contactSearch">Search</button> 
+		</form>
+		<br>
+		<nav>
+			<button id="showAlive">Alive Contacts</button>
+			<button id="showDead">Dead Contacts</button>
+			<button id="showUndead">Undead Contacts</button>
+		</nav>
+	</header>
+	<hr>
 
-	<form id="newContact">New Contact
-		<label>Name:
-			<input type="text" name="name">
-		</label>
+	<div class="container">
 		
-		<label>Age:
-			<input type="text" name="age">
-		</label>
+		<div id="showForm" class="col-sm-5">
+			<form id="newContact">Add New Contact
+				<br><br>
+				<label>Name:
+					<input type="text" name="name" placeholder="Michonne">
+				</label>
+				<br>
+				<label>Age:
+					<input type="text" name="age" placeholder="33">
+				</label>
+				<br>
+				<label>Address:
+					<input type="text" name="address" placeholder="534 Katana Way, Atlanta, GA 35927">
+				</label>
+				<br>
+				<label>Phone Number:
+					<input type="text" name="phoneNumber" placeholder="452-485-2895"> 
+				</label>
+				<br>
+				<label>Category:
+					<select id="category">
+						<option id="default">This person is...</option>
+						<option>Alive</option>
+						<option>Dead</option>
+						<option>Undead</option>
+					</select>
+				</label>
+				<br><br>
+				<button>Add Contact</button>
+			</form>
+		</div>
 
-		<label>Address:
-			<input type="text" name="address">
-		</label>
-			
-		<label>Phone Number:
-			<input type="text" name="phoneNumber"> 
-		</label>
-
-		<label>Category:
-			<select id="category">
-				<option>Alive</option>
-				<option>Dead</option>
-				<option>Undead</option>
-			</select>
-		</label>
-		<button>Add Contact</button>
-	</form>
-
-	<ul class="container">
-		<article class="alive">
-			<h2>Alive</h2>
-		</article>
-
-		<article class="dead">
-			<h2>Dead</h2>
-		</article>
-
-		<article class="undead">
-			<h3>Undead</h3>
-		</article>
-	</ul>
+		<div class="col-sm-7 display">
+		</div>
+	</div>
 
 	<!--- Libraries -->
 
@@ -59,12 +69,6 @@
   <script type="text/javascript" src="http://backbonejs.org/backbone-min.js"></script>
 
   <!--- Templates -->
-
-  <script type="text/template" id="category-template">
-  	<h2><%= name %></h2>
-  	<ul class="contacts">
-  	</ul>
-  </script>
 
   <script type="text/template" id="contact-template">
   		<h3>Name: <%= name %></h3>
@@ -77,6 +81,10 @@
   		<button data-action="edit">edit</button>
   		<button data-action="destroy">delete</button>
   </script>
+
+  <script type="text/template" id="contact-list-view">
+		<h2><%= category_name %></h2>
+	</script>
 
   <script type="text/template" id="contact-edit-template">
   	<form>
@@ -102,6 +110,7 @@
 
 			<label>Category:
 				<select id="category">
+					<option>This person is...</option>
 					<option>Alive</option>
 					<option>Dead</option>
 					<option>Undead</option>
@@ -118,7 +127,16 @@
   <!--- <script type="text/javascript" src="/javascripts/backbone/category.js"></script> -->
 
   <script type="text/javascript" src="/javascripts/scripts.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
  
 </body>
 
-</html>
+</html>	
