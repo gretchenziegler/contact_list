@@ -37,6 +37,8 @@ function sort(data){
 			allContacts.add(undeadContacts.create(data[i]));
 		}
 	}
+	$(".display").empty();
+	$('.display').append($("<h2>Contact Status: Uncertain</h2>"));
 }
 
 ContactList.initialize = function(){
@@ -48,6 +50,12 @@ ContactList.initialize = function(){
 		dataType: 'json'
 	}).done(function(data){
 		sort(data);
+	})
+
+	// play WD theme on title hover :-)
+	var $title = $('h1')
+	$title.on('mouseenter', function(){
+		document.getElementById("theme").play();
 	})
 
 	// search existing contacts and display if contact exists
@@ -63,11 +71,20 @@ ContactList.initialize = function(){
 		if (!contactToDisplay){
 			alert("That contact does not exist.")
 		} else {
+			if (contactToDisplay.attributes.category_id === 3){
+				var category_name = "Alive"
+			} else if (contactToDisplay.attributes.category_id === 4){
+				var category_name = "Dead"
+			} else {
+				var category_name = "Undead"
+			}
 			$('.display').empty();
 			var template = _.template($("#contact-template").html());
-			$('.display').append(template(contactToDisplay.attributes))
+			var rendered = template(contactToDisplay.attributes);
+			var $showDiv = $("<h2>Status: " + category_name + "</h2><div class='show " + category_name + "'>" + rendered + "</div>")
+			$('.display').append($showDiv)
 		}
-		name.val("");
+		$('input[name="contactSearch"]').val("");
 	});
 
 	// upon clicking alive contacts button, display alive contacts.

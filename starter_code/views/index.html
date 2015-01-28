@@ -5,10 +5,14 @@
   <meta charset="UTF-8">
   <title>Contacts</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+  <link href='http://fonts.googleapis.com/css?family=Nosifer' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
 	<header>	
+		<audio id="theme" href="../media/theme.mp3"></audio>
+		
 		<h1>Zombie Apocalypse Now</h1>
 		<h3>Who is still alive to take your call?</h3>
 		<form>
@@ -26,39 +30,38 @@
 
 	<div class="container">
 		
-		<div id="showForm" class="col-sm-5">
-			<form id="newContact">Add New Contact
-				<br><br>
-				<label>Name:
+		<div id="showForm" class="dark-matter">
+			<form id="newContact">
+				<h3>Add New Contact</h3>
+				<label><span>Name: </span>
 					<input type="text" name="name" placeholder="Michonne">
 				</label>
 				<br>
-				<label>Age:
+				<label><span>Age: </span>
 					<input type="text" name="age" placeholder="33">
 				</label>
 				<br>
-				<label>Address:
+				<label><span>Address: </span>
 					<input type="text" name="address" placeholder="534 Katana Way, Atlanta, GA 35927">
 				</label>
 				<br>
-				<label>Phone Number:
+				<label><span>Phone Number: </span>
 					<input type="text" name="phoneNumber" placeholder="452-485-2895"> 
 				</label>
-				<br>
-				<label>Category:
+				<br><br>
+				<label><span>Status: </span>
 					<select id="category">
-						<option id="default">This person is...</option>
 						<option>Alive</option>
 						<option>Dead</option>
 						<option>Undead</option>
 					</select>
 				</label>
-				<br><br>
+				<br>
 				<button>Add Contact</button>
 			</form>
 		</div>
 
-		<div class="col-sm-7 display">
+		<div class="display">
 		</div>
 	</div>
 
@@ -83,60 +86,51 @@
   </script>
 
   <script type="text/template" id="contact-list-view">
-		<h2><%= category_name %></h2>
+		<h2>Status: <%= category_name %></h2>
 	</script>
 
   <script type="text/template" id="contact-edit-template">
+  	<div class="edit">
   	<form>
-  		<label>Name:
+  		<label><span>Name: </span>
 				<input type="text" name="name" value= <%= name %>>
 			</label>
-
-			<label>Picture:
+			<br>
+			<label><span>Picture: </span>
 				<input type="text" name="picture" value=<%= picture %>>
 			</label>
-
-			<label>Age:
+			<br>
+			<label><span>Age: </span>
 				<input type="text" name="age" value= <%= age %>
 			</label>
-			
-			<label>Address:
+			<br><br>
+			<label><span>Address: </span>
 				<input type="text" name="address" value= <%= address %>
 			</label>
-		
-			<label>Phone Number:
+			<br><br>
+			<label><span>Phone Number: </span>
 				<input type="text" name="phoneNumber" value= <%= phone_number %> 
 			</label>
-
-			<label>Category:
+			<br><br>
+			<label><span>Status: </span>
 				<select id="category">
-					<option>This person is...</option>
 					<option>Alive</option>
 					<option>Dead</option>
 					<option>Undead</option>
 				</select>
 			</label>
+			<br><br>
   	</form>
   	<button id="submit">submit changes</button>
   	<button id="cancel">cancel</button>
+  	<div>
   </script>
 
   <!--- Backbone App -->
   <script type="text/javascript" src="/javascripts/backbone/contact.js"></script>
 
-  <!--- <script type="text/javascript" src="/javascripts/backbone/category.js"></script> -->
-
   <script type="text/javascript" src="/javascripts/scripts.js"></script>
 
-  <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
- 
 </body>
 
 </html>	

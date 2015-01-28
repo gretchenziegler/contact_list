@@ -1,5 +1,23 @@
+body {
+	font-family: 'Special Elite', cursive;
+}
+
+h1 {
+	font-family: 'Nosifer', cursive;
+}
+
+h1:hover {
+	color: #942929;
+}
+
+h2 {
+	text-align: center;
+	color: white;
+}
+
 header {
 	text-align: center;
+	color: black;
 }
 
 button {
@@ -11,36 +29,81 @@ button:hover {
 	border: 3px solid black;
 }
 
-h1 {
-	color: red;
-}
-
 hr {
+	background-color: black;
 	color: black;
 	height: 3px;
 }
 
-ul {
-	list-style: none;
+img {
+	border-radius: 5px;
 }
 
-article {
-	border: 3px solid black;
+ul {
+	list-style: none;
+	text-align: left;
+}
+
+.show {
+	margin: 15px;
+	padding: 5px 0px 8px 0px; 
 	text-align: center;
+	border-radius: 5px;
+}
+
+.edit {
+	text-align: left;
+	margin-left: 10px;
 	padding: 10px;
 }
 
 .Alive {
-	background-color: green;
-	text-align: center;
+	background-image: url("http://fc05.deviantart.net/fs42/i/2009/133/8/4/green_painted_distressed_wood_by_beckas.jpg");
 }
 
 .Dead {
-	background-color: red;
-	text-align: center;
+	background-image: url("http://fc07.deviantart.net/fs71/i/2009/362/1/4/red_distressed_paper_texture_by_beckas.jpg");
+	color: white;
 }
 
 .Undead {
-	background-color: yellow;
-	text-align: center;
+	background-image: url("http://fc06.deviantart.net/fs50/i/2009/338/b/d/yellow_grunge_texture_by_beckas.jpg");
+}
+
+.display {
+	float: right;
+	width: 61.5%;
+	padding: 10px;
+	border-radius: 5px;
+	background-image: url("http://www.droidforums.net/data/photos/l/2/2072-1261168284-b8fe8fb63a22f797d7398cac09e13118.jpg");
+}
+
+.dark-matter {
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  float: left;
+  background-image: url("http://www.droidforums.net/data/photos/l/2/2072-1261168284-b8fe8fb63a22f797d7398cac09e13118.jpg");
+  padding: 20px 30px 20px 30px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
+  margin: 0px 0px 5px;
+}
+
+span {
+  float: left;
+  width: 30%;
+  text-align: left;
+  padding-right: 5px;
+}
+
+textarea {
+  height:100px;
+  padding: 5px 0px 0px 5px;
+  width: 70%;
 }

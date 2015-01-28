@@ -51,7 +51,7 @@ ContactList.Views.ContactView = Backbone.View.extend({
 		} else {
 			var category_name = "Undead"
 		}
-		this.$el.attr("class", category_name)
+		this.$el.attr("class", "show " + category_name)
 		this.$el.empty();
 		this.$el.html(this.template(this.model.attributes));
 		return this
@@ -142,6 +142,7 @@ ContactList.Views.ContactListView = Backbone.View.extend({
 		// self is the contact list view
 		var self = this;
 		// will empty itself, and then pass each model in the collection through function to make new model view, and then append to collection view
+		this.$el.fadeOut("slow")
 		this.$el.empty();
 		if (this.collection.models[0].attributes.category_id === 3){
 			var category_name = "Alive"
@@ -156,6 +157,6 @@ ContactList.Views.ContactListView = Backbone.View.extend({
 			self.$el.append( contactView.render().el);
 		})
 		// will return updated collection view to DOM
-		return this
+		return this.$el.fadeIn('slow')
 	}
 });
