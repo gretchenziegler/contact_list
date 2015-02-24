@@ -155,8 +155,9 @@ ContactList.Views.ContactListView = Backbone.View.extend({
 		_.each(this.collection.models, function(contact){
 			var contactView = new ContactList.Views.ContactView({model: contact});
 			self.$el.append( contactView.render().el);
+			self.$el.fadeIn("slow");
 		})
 		// will return updated collection view to DOM
-		return this.$el.fadeIn('slow')
+		return this
 	}
 });

@@ -55,7 +55,9 @@ ContactList.initialize = function(){
 	// play WD theme on title hover :-)
 	var $title = $('h1')
 	$title.on('mouseenter', function(){
-		document.getElementById("theme").play();
+		console.log("hovering...")
+		var theme = document.querySelector("audio");
+		theme.play();
 	})
 
 	// search existing contacts and display if contact exists
